@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temp Host | Hourly Hosting</title>
+    <meta name="description" content="Premium temporary hosting for anything, starting at just ₹1 ($0.01) per hour.">
+    
+    <!-- Favicon (Inline SVG for modern look) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%236366f1' d='M13.3 2.4L6.7 13.7h4.8l-1.3 7.9l7.7-12.7h-4.8L13.3 2.4z'/%3E%3C/svg%3E" type="image/svg+xml">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f0f13',
+                            card: '#18181b',
+                            accent: '#6366f1', // Indigo
+                            glow: '#818cf8',
+                            success: '#10b981',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f0f13;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #37373a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6366f1;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(24, 24, 27, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-card {
+            background: linear-gradient(145deg, rgba(30,30,35,0.9) 0%, rgba(20,20,25,0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Neon Text */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Background Grid */
+        .bg-grid {
+            background-size: 50px 50px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-white font-sans antialiased overflow-x-hidden selection:bg-brand-accent selection:text-white">
+
+    <!-- Background Effects -->
+    <div class="fixed inset-0 z-[-1] bg-grid pointer-events-none"></div>
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-brand-accent/20 rounded-full blur-[128px] pointer-events-none"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[128px] pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="glass border-b border-white/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                        <div class="w-10 h-10 bg-brand-accent rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-accent/30">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <span class="font-display font-bold text-2xl tracking-tight">Temp<span class="text-brand-accent">Host</span></span>
+                    </div>
+
+                    <!-- Desktop Menu -->
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-8">
+                            <a href="#features" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium text-gray-300">Features</a>
+                            <a href="#pricing" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium text-gray-300">Pricing</a>
+                            <a href="#how-it-works" class="hover:text-brand-accent transition-colors px-3 py-2 rounded-md text-sm font-medium text-gray-300">How it Works</a>
+                        </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="hidden md:block">
+                        <a href="https://dsc.gg/temp-host" target="_blank" class="bg-white text-black hover:bg-gray-200 px-6 py-2.5 rounded-full font-bold text-sm transition-all transform hover:scale-105 flex items-center gap-2">
+                            <i class="fa-brands fa-discord text-indigo-600 text-lg"></i> Join Discord
+                        </a>
+                    </div>
+
+                    <!-- Mobile menu button -->
+                    <div class="-mr-2 flex md:hidden">
+                        <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/10 focus:outline-none">
+                            <i class="fa-solid fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden glass border-b border-white/5 absolute w-full" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#features" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onclick="toggleMobileMenu()">Features</a>
+                <a href="#pricing" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium" onclick="toggleMobileMenu()">Pricing</a>
+                <a href="https://dsc.gg/temp-host" target="_blank" class="bg-brand-accent text-white block px-3 py-3 mt-4 rounded-md text-base font-bold text-center">
+                    <i class="fa-brands fa-discord mr-2"></i> Join Server
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-block animate-float mb-6">
+                <span class="py-1.5 px-4 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-sm font-semibold tracking-wide uppercase">
+                    <i class="fa-solid fa-clock mr-2"></i> Pay As You Go
+                </span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-display font-bold mb-6 leading-tight">
+                High Performance <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-purple-500 text-glow">Short-Term Hosting</span>
+            </h1>
+            
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400 mb-4">
+                Deploy Anything. Games, Bots, Websites, or VPS.
+                Pay only for what you use. Maximum flexibility, minimal cost.
+            </p>
+
+            <!-- New Note about Specs -->
+            <p class="text-sm text-gray-500 mb-10">
+                *Default specifications apply. For custom specs or detailed configurations, <a href="https://dsc.gg/temp-host" target="_blank" class="text-brand-accent hover:text-brand-glow underline font-semibold">join our Discord server</a>.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://dsc.gg/temp-host" target="_blank" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-brand-accent rounded-full hover:bg-brand-accent/90 hover:shadow-lg hover:shadow-brand-accent/50 focus:outline-none ring-offset-2 focus:ring-2 ring-indigo-500">
+                    <i class="fa-brands fa-discord mr-2 text-xl group-hover:animate-bounce"></i> Host Now
+                </a>
+                <a href="#pricing" class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 border border-white/20 rounded-full hover:bg-white/5 focus:outline-none">
+                    View Pricing
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-20 bg-black/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Why Choose Us?</h2>
+                <p class="text-gray-400">Everything you need, nothing you don't.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1: Host Anything -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fa-solid fa-server text-9xl"></i>
+                    </div>
+                    <div class="w-14 h-14 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 text-2xl mb-6">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Host Absolutely Anything</h3>
+                    <p class="text-gray-400">Full VPS access allows you to host Games, Bots, Websites, or any Linux application for your desired short period.</p>
+                </div>
+
+                <!-- Card 2: Uptime & Performance -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fa-solid fa-gauge-high text-9xl"></i>
+                    </div>
+                    <div class="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center text-blue-400 text-2xl mb-6">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">99.9% Uptime Guaranteed</h3>
+                    <p class="text-gray-400">Reliable performance with DDoS protection included. Your temporary instance stays online when you need it most.</p>
+                </div>
+
+                <!-- Card 3: Instant Setup -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <i class="fa-solid fa-bolt text-9xl"></i>
+                    </div>
+                    <div class="w-14 h-14 bg-green-500/20 rounded-xl flex items-center justify-center text-green-400 text-2xl mb-6">
+                        <i class="fa-solid fa-stopwatch"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Instant & Cheap</h3>
+                    <p class="text-gray-400">Setup takes seconds. Pricing is transparent at just ₹1 ($0.01) per hour. No hidden fees, no long contracts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 relative">
+        <div class="absolute inset-0 bg-brand-accent/5 skew-y-3 z-[-1]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Unbeatable Pricing</h2>
+                <p class="text-gray-400">Cheaper than your bubblegum. Seriously.</p>
+            </div>
+
+            <div class="max-w-lg mx-auto">
+                <div class="glass-card rounded-3xl p-1 border-2 border-brand-accent/50 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brand-accent text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg shadow-brand-accent/40">
+                        MOST POPULAR
+                    </div>
+                    
+                    <div class="bg-brand-dark/50 rounded-[20px] p-8 text-center">
+                        <h3 class="text-2xl font-bold text-gray-200">Standard Plan</h3>
+                        
+                        <div class="my-8 flex items-end justify-center gap-2">
+                            <span class="text-5xl font-display font-bold text-white">₹1</span>
+                            <span class="text-gray-400 text-xl mb-2">/ hour</span>
+                        </div>
+                        
+                        <!-- NEW SPEC NOTE HERE -->
+                        <p class="text-xs text-gray-500 mb-4 px-4">
+                            *Pricing based on **Standard Specifications** (available on Discord). Custom specs are available at a higher rate.
+                        </p>
+
+                        <div class="text-sm text-gray-500 mb-8 bg-white/5 py-2 rounded-lg inline-block px-4">
+                            That's approx <span class="text-green-400 font-bold">$0.012 USD</span>
+                        </div>
+
+                        <ul class="text-left space-y-4 mb-8 text-gray-300">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-brand-success mr-3"></i> 5 Hours & 30 Min Max Session</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-brand-success mr-3"></i> 5 Hours for ~₹5 ($0.06)</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-brand-success mr-3"></i> DDoS Protection</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-brand-success mr-3"></i> Instant Discord Support</li>
+                        </ul>
+
+                        <a href="https://dsc.gg/temp-host" target="_blank" class="block w-full py-4 rounded-xl bg-gradient-to-r from-brand-accent to-purple-600 text-white font-bold text-lg hover:shadow-lg hover:shadow-purple-500/25 transition-all transform hover:-translate-y-1">
+                            Start Hosting
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="mt-16 text-center">
+                <p class="text-gray-500 uppercase tracking-widest text-xs font-bold mb-6">Supported Payment Methods</p>
+                <div class="flex justify-center items-center gap-8 flex-wrap">
+                    <div class="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-lg border border-white/10 hover:border-brand-accent/50 transition-colors">
+                        <i class="fa-brands fa-bitcoin text-yellow-500 text-2xl"></i>
+                        <span class="font-bold">Crypto (LTC)</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-lg border border-white/10 hover:border-brand-accent/50 transition-colors">
+                        <i class="fa-solid fa-mobile-screen-button text-blue-400 text-2xl"></i>
+                        <span class="font-bold">UPI (India)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="py-20 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-display font-bold mb-12 text-center">How to Start</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-6">
+                    <div class="w-16 h-16 bg-brand-accent rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6 shadow-lg shadow-brand-accent/30">1</div>
+                    <h3 class="text-xl font-bold mb-2">Join Discord</h3>
+                    <p class="text-gray-400">Click the invite link to join our automated server.</p>
+                </div>
+                
+                <div class="p-6">
+                    <div class="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6 border border-white/10">2</div>
+                    <h3 class="text-xl font-bold mb-2">Create Ticket</h3>
+                    <p class="text-gray-400">Open a ticket and choose your hosting plan and duration.</p>
+                </div>
+                
+                <div class="p-6">
+                    <div class="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6 border border-white/10">3</div>
+                    <h3 class="text-xl font-bold mb-2">Pay & Play</h3>
+                    <p class="text-gray-400">Pay via UPI or Crypto and get your server credentials instantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-brand-accent rounded flex items-center justify-center text-white text-sm">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <span class="font-display font-bold text-xl">Temp<span class="text-brand-accent">Host</span></span>
+            </div>
+            
+            <div class="text-gray-500 text-sm">
+                &copy; 2025 Temp Host. All rights reserved.
+            </div>
+
+            <div class="flex gap-4">
+                <a href="https://dsc.gg/temp-host" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-[#5865F2] hover:text-white transition-all">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-lg');
+                navbar.firstElementChild.classList.add('bg-black/80');
+                navbar.firstElementChild.classList.remove('glass');
+                navbar.firstElementChild.style.backdropFilter = "blur(20px)";
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.firstElementChild.classList.remove('bg-black/80');
+                navbar.firstElementChild.classList.add('glass');
+            }
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
